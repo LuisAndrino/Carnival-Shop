@@ -1,16 +1,14 @@
 let uwu = true;
-let totalTickets = 1000;
+let totalTickets = 0;
 
 const objGifts = {
-  name: {
-    "Teddy Bear" : 1, "Big Red Ball" : 2, "Huge Bear" : 3, "Candy" : 4, "Stuffed Tiger" : 5, "Stuffed Dragon" : 6,
-    "Skateboard" : 7, "Toy Car" : 8, "Basketball" : 9, "Scary Mask" : 10
-  } ,
+  name: {    1: "Teddy Bear", 2: "Big Red Ball", 3 : "Huge Bear", 4 : "Candy", 5: "Stuffed Tiger",
+    6: "Stuffed Dragon", 7 : "Skateboard", 8 : "Toy Car", 9: "Basketball", 10: "Scary Mask" } ,
   cost: [10, 5, 50, 8, 15, 30, 100, 25, 20 , 75]
 }
 
-let firstGifts = Object.keys(objGifts.name);
-let firstId = Object.values(objGifts.name);
+let firstGifts = Object.values(objGifts.name);
+let firstId = Object.keys(objGifts.name);
 
 
 console.log("WELCOME TO THE CARNIVAL GIFT SHOP!");
@@ -23,8 +21,8 @@ for(let i = 0; i < firstGifts.length; i++){
 
 while (uwu){
   const input = require('sync-input');
-  let gifts = Object.keys(objGifts.name);
-  let id = Object.values(objGifts.name);
+  let gifts = Object.values(objGifts.name);
+  let id = Object.keys(objGifts.name);
 
   console.log("\nWhat do you want to do?");
   console.log("1-Buy a gift 2-Add tickets 3-Check tickets 4-Show gifts 5-Exit the shop")
@@ -34,23 +32,31 @@ while (uwu){
 
     switch (choose) {
       case 1 :
+        if (Object.keys(objGifts.name).length === 0){
+        console.log("Wow! There are no gifts to buy.");
+        }
+        else{
         console.log("Enter the number of the gift you want to get:");
         let giftChoose = Number(input());
-        if(isNaN(giftChoose) || giftChoose == " "){
+        if (isNaN(giftChoose) || giftChoose == " ") {
           console.log("Please enter a valid number!");
-        }else if (Object.keys(objGifts.name).length === 0){
-          console.log("Wow! There are no gifts to buy.");
-        } else if (giftChoose > Object.keys(objGifts.name).length){
+        } else if (giftChoose > Object.keys(objGifts.name).length) {
           console.log("There is no gift with that number!")
-        } else if(objGifts.cost[giftChoose - 1] > totalTickets){
+        } else if (objGifts.cost[giftChoose - 1] > totalTickets) {
           console.log("You don't have enough tickets to buy this gift.")
         } else {
-          console.log(`Here you go, one ${gifts[giftChoose - 1]}!`);
-          totalTickets = totalTickets - objGifts.cost[giftChoose - 1];
-          delete objGifts.name[gifts[giftChoose - 1]];
-          objGifts.cost.splice(giftChoose - 1, 1);
-          console.log(`Total tickets: ${totalTickets}`);
+
+          if(objGifts.name[giftChoose] === undefined){
+            console.log("There is no gift with that number!")
+          } else {
+            console.log(`Here you go, one ${objGifts.name[giftChoose]}!`);
+            totalTickets = totalTickets - objGifts.cost[giftChoose - 1];
+            delete objGifts.name[giftChoose];
+            objGifts.cost.splice(giftChoose - 1, 1);
+            console.log(`Total tickets: ${totalTickets}`);
+          }
         }
+      }
         break;
       case 2:
         console.log("Enter the ticket amount:");
