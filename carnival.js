@@ -1,6 +1,5 @@
 let uwu = true;
-let tickets = 0;
-let totalTickets = 0;
+let totalTickets = 1000;
 
 const objGifts = {
   name: {
@@ -37,9 +36,9 @@ while (uwu){
       case 1 :
         console.log("Enter the number of the gift you want to get:");
         let giftChoose = Number(input());
-        if(isNaN(giftChoose)){
+        if(isNaN(giftChoose) || giftChoose == " "){
           console.log("Please enter a valid number!");
-        }else if (objGifts.name.length === 0){
+        }else if (Object.keys(objGifts.name).length === 0){
           console.log("Wow! There are no gifts to buy.");
         } else if (giftChoose > Object.keys(objGifts.name).length){
           console.log("There is no gift with that number!")
@@ -47,7 +46,7 @@ while (uwu){
           console.log("You don't have enough tickets to buy this gift.")
         } else {
           console.log(`Here you go, one ${gifts[giftChoose - 1]}!`);
-          totalTickets = tickets - objGifts.cost[giftChoose - 1];
+          totalTickets = totalTickets - objGifts.cost[giftChoose - 1];
           delete objGifts.name[gifts[giftChoose - 1]];
           objGifts.cost.splice(giftChoose - 1, 1);
           console.log(`Total tickets: ${totalTickets}`);
@@ -56,19 +55,28 @@ while (uwu){
       case 2:
         console.log("Enter the ticket amount:");
         let newTickets = Number(input());
-        totalTickets = newTickets + tickets;
-        console.log(`Total tickets: ${totalTickets}`);
-
+        if(isNaN(newTickets) || newTickets < 0 || newTickets > 1000 ){
+          console.log("Please enter a valid number between 0 and 1000.")
+        }
+        else {
+          totalTickets = newTickets + totalTickets;
+          console.log(`Total tickets: ${totalTickets}`);
+        }
         break;
       case 3:
         console.log(`Total tickets: ${totalTickets}`);
 
         break;
       case 4:
+      if(Object.keys(objGifts.name).length === 0) {
+        console.log("Wow! There are no gifts to buy.");
+      }
+      else {
         console.log("Here's the list of gifts:\n");
         for (let i = 0; i < gifts.length; i++) {
           console.log(`${id[i]}- ${gifts[i]}, Cost: ${objGifts.cost[i]} tickets`);
         }
+      }
         break;
       case 5:
         uwu = false;
