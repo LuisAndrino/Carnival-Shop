@@ -7,6 +7,7 @@ const objGifts = {
   cost: {1: 10, 2: 5, 3: 50, 4: 8, 5: 15, 6: 30, 7: 100, 8: 25, 9: 20, 10: 75}
 }
 
+//Print the list at the beginning
 let firstGifts = Object.values(objGifts.name);
 let firstId = Object.keys(objGifts.name);
 
@@ -20,6 +21,7 @@ for(let i = 0; i < firstGifts.length; i++){
 }
 
 while (uwu){
+  //Printing the menu
   const input = require('sync-input');
   let gifts = Object.values(objGifts.name);
   let id = Object.keys(objGifts.name);
@@ -31,6 +33,7 @@ while (uwu){
   if(choose > 0 && choose <= 5 ) {
 
     switch (choose) {
+      //Displaying and erasing things from the object
       case 1 :
         if (Object.keys(objGifts.name).length === 0){
           console.log("Wow! There are no gifts to buy.");
