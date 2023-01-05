@@ -73,11 +73,11 @@ while (uwu){
 
         break;
       case 4:
+        console.log("Here's the list of gifts:\n");
       if(Object.keys(objGifts.name).length <= 0) {
         console.log("Wow! There are no gifts to buy.");
       }
       else {
-        console.log("Here's the list of gifts:\n");
         // Get the updated keys of the name and cost properties as arrays
         const updatedNameKeys = Object.keys(objGifts.name);
         const updatedCostValues = Object.values(objGifts.cost);
